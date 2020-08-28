@@ -1,6 +1,6 @@
 pipeline {
   environment {
-    imagename = "ashokshingade24/flask-hello-world"
+    imagename = "shivanjalikaname007/flask-hello-world"
     registryCredential = 'as-docker-hub'
     dockerImage = ''
   }
