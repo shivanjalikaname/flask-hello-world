@@ -37,12 +37,22 @@ pipeline {
 
       }
     }
-	  stage('Deploy pod on k8s') {
-	    steps{
-	      sh "ssh -p 22 -i /tmp/shivanjali-aws.pem ec2-user@172.31.52.80 kubectl apply -f ."
-	  }
-	 }
-    
+    stage('Deploy pod on k8s') {
+      steps{
+        sshagent(['k8s']) {
+            sh "scp -o StrictHostKeyCheaking=no kubernetes.yaml ec2-user@172.31.52.80:/home/ec2-user/"
+            script{
+                try{
+                  sh "ssh ec2-user@172.31.52.80 kubectl apply -f ."
+                }catch(error){
+                    sh "ssh ec2-user@172.31.52.80 kubectl create -f ."
+                }
+
+
+            }
+      }
+    }
+   }
   }
 }
 
