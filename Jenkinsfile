@@ -39,7 +39,7 @@ pipeline {
     }
 	  stage('Deploy pod on k8s') {
 	    steps{
-	      sh "kubectl apply -f ."
+	      sh "ssh -p 22 -i /tmp/shivanjali-aws.pem ec2-user@172.31.52.80 kubectl apply -f ."
 	  }
 	 }
     
