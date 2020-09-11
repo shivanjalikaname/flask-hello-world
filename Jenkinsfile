@@ -37,7 +37,12 @@ pipeline {
 
       }
     }
-   
+	  stage('Deploy pod on k8s') {
+	    steps{
+	      sh "kubectl apply -f ."
+	  }
+	 }
+    
   }
 }
 
