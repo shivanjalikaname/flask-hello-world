@@ -40,7 +40,7 @@ pipeline {
     stage('Deploy pod on k8s') {
       steps{
         sshagent(['k8s']) {
-            sh "scp -o StrictHostKeyCheaking=no kubernetes.yaml ec2-user@172.31.52.80:/home/ec2-user/"
+            sh "scp -o StrictHostKeyCheacking=no kubernetes.yaml ec2-user@172.31.52.80:/home/ec2-user/"
             script{
                 try{
                   sh "ssh ec2-user@172.31.52.80 kubectl apply -f ."
