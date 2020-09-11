@@ -43,9 +43,9 @@ pipeline {
             sh "scp -i /tmp/shivanjali-aws.pem kubernetes.yaml ec2-user@localhost:/home/ec2-user/"
             script{
                 try{
-                  sh "ssh ec2-user@172.31.52.80 kubectl apply -f ."
+                  sh "ssh -i /tmp/shivanjali-aws.pem ec2-user@localhost kubectl apply -f ."
                 }catch(error){
-                    sh "ssh ec2-user@172.31.52.80 kubectl create -f ."
+                    sh "ssh -i /tmp/shivanjali-aws.pem ec2-user@localhost kubectl create -f ."
                 }
 
 
