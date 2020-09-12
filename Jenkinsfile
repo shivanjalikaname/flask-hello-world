@@ -40,12 +40,12 @@ pipeline {
     stage('Deploy pod on k8s') {
       steps{
         sshagent(['k8s']) {
-            sh "scp -i /tmp/shivanjali-aws.pem kubernetes.yaml ec2-user@localhost:/home/ec2-user/"
+            sh "sudo scp /var/lib/jenkins/workspace/module/kubernetes.yaml ubuntu@ec2-52-26-11-149.us-west-2.compute.amazonaws.com:/home/ubuntu/"
             script{
                 try{
-                  sh "ssh -i /tmp/shivanjali-aws.pem ec2-user@localhost sudo kubectl apply -f ."
+                  sh "sudo ssh ubuntu@ec2-52-26-11-149.us-west-2.compute.amazonaws.com kubectl apply -f ."
                 }catch(error){
-                    sh "ssh -i /tmp/shivanjali-aws.pem ec2-user@localhost sudo kubectl create -f ."
+                    sh "sudo ssh ubuntu@ec2-52-26-11-149.us-west-2.compute.amazonaws.com kubectl create -f ."
                 }
 
 
