@@ -39,7 +39,6 @@ pipeline {
     }
     stage('Deploy pod on k8s') {
       steps{
-#        sshagent(['k8s']) {
             sh "sudo scp /var/lib/jenkins/workspace/module/kubernetes.yaml ubuntu@ec2-52-26-11-149.us-west-2.compute.amazonaws.com:/home/ubuntu/"
             script{
                 try{
@@ -48,8 +47,6 @@ pipeline {
                     sh "sudo ssh ubuntu@ec2-52-26-11-149.us-west-2.compute.amazonaws.com kubectl create -f ."
                 }
 
-
-#            }
       }
     }
    }
